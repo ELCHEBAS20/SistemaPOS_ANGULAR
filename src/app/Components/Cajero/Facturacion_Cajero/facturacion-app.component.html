@@ -1,0 +1,70 @@
+<!-- <app-nav-bar></app-nav-bar> -->
+<section>
+
+  <ng-container *ngIf="isDisabled">
+    <div [ngStyle]="{'display':isDisabled}" class="alert alert-success w-75" role="alert">
+      <strong>Excelente</strong>,Elemento ingresado con exito.
+    </div>
+  </ng-container>
+
+  <div class="mb-4" id="bxForm">
+    <input type="text" class="form-control w-75 fw-bold" placeholder="Escanear Codigo,por favor:" #QrValor
+      (keyup)="Function_AppMain($event,QrValor)"
+      onkeypress="if(event.keyCode>=48 && event.keyCode<=57){return true;}else{return false;}" oncopy="return false;"
+      onpaste="return false;" [minLength]="13" [maxLength]="13" #TxtInput autofocus>
+  </div>
+
+  <div class="card w-75 mt-5 mx-5" id="card">
+    <div class="card-header header">
+      <strong>Bienvenido,Usuari@.</strong>
+      <button class="btn btn-danger btn-sm" (click)="validarDatos()"
+        [disabled]="CantidadProducto.length!=0 ? false : true"><i class="fa-solid fa-thumbs-up"></i> Finalizar
+        Compra</button>
+      <button class="btn btn-primary btn-sm mx-2" (click)="ClearProducto()"
+        [disabled]="CantidadProducto.length==0 ?  true : false"><i class="fa-solid fa-question"></i> Vaciar
+        Listado</button>
+
+    </div>
+    <div class="card-body">
+      <div class="main_header">
+        <div *ngFor="let item of CodigoProducto;index as iterador" class="BodyBox">
+          <div id="infoUser">
+            #.{{CodigoProducto[iterador]}}
+          </div>
+          <div id="infoUser">
+            {{NameProducto[iterador]}}
+          </div>
+          <div id="infoUser">
+            {{CantidadProducto[iterador]}} Prod.
+          </div>
+          <div id="infoUser">
+            VP. $.{{ValorProducto[iterador]}}
+          </div>
+          <div id="infoUser">
+            TP. $.{{TotalPrecioProducto[iterador]}}
+          </div>
+          <div id="infoUser">
+            <button (click)="Function_DeletedElement(iterador)" class="btn btn-outline-danger btn-sm">X</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <div class="row">
+        <div class="col-2">
+          <ul>
+            <div class="mb-3">
+              <li><strong>Subtotal:</strong> $ {{ValorAPagar}}</li>
+            </div>
+            <li><strong>Total Pagar:</strong> $ {{ValorAPagar}}</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</section>

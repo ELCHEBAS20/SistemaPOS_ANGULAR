@@ -1,0 +1,152 @@
+<app-header></app-header>
+<app-aside></app-aside>
+
+<div class="content-wrapper" style="background: #fff !important;">
+
+  <!-- <div class="card-body">
+    <table id="user-table" style="width: 1200px;" class="table table-hover table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cedula</th>
+          <th scope="col">NombreCliente</th>
+          <th scope="col">ApellidoCliente</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody style="text-align: center;">
+        <tr *ngFor="let item of getListarCliente;index as index">
+          <td>{{index+1}}</td>
+          <td>{{getListarCliente[index].cedula}}</td>
+          <td>{{getListarCliente[index].nombreCliente}}</td>
+          <td>{{getListarCliente[index].apellidoCliente}}</td>
+          <td>{{getListarCliente[index].estadoCliente}}</td>
+          <td class="btn-accion">
+            <button (click)="HistorialCliente(getListarCliente[index].idCliente,index)" class="text-danger fw-bold"
+              [attr.data-toggle]="'modal'" [attr.data-target]="'#ModalUsuario'+index" matTooltipPosition="right"
+              matTooltip="Visualizar Factura"><i class="fa-solid fa-scroll"></i></button>
+            <span>&nbsp;</span>
+            <button class="text-success fw-bold" matTooltipPosition="above" matTooltip="Enviar Factura"><i
+                class="fa-brands fa-whatsapp"></i></button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div> -->
+
+  <div class="nav flex-column nav-pills w-25" style="position: relative;top: 200px;left: 10px;text-align: center;"
+    id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+      aria-controls="v-pills-home" aria-selected="true"><i class="fa-solid fa-plus"></i>&nbsp; Creacion de Factura</a>
+    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+      aria-controls="v-pills-messages" aria-selected="false"><i class="fa-brands fa-paypal"></i>&nbsp; Servicio de
+      pago</a>
+    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+      aria-controls="v-pills-profile" aria-selected="false"><i class="fa-solid fa-check"></i>&nbsp; Facturas
+      Realizadas</a>
+  </div>
+  <div class="tab-content" style="position: absolute;left: 22%;top: -20px;" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+
+      <div class="card" style="position: relative;left: 380px;top: 240px;width: 700px;">
+        <h5 class="card-header"><b>Creacion de factura</b></h5>
+        <div class="card-body">
+
+        </div>
+      </div>
+
+    </div>
+    <div class="tab-pane fade w-50" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+      <div class="card-body">
+        <table id="user-table" style="width: 800px;" class="table table-hover table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Cedula</th>
+              <th scope="col">NombreCliente</th>
+              <th scope="col">ApellidoCliente</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody style="text-align: center;">
+            <tr *ngFor="let item of getListarCliente;index as index">
+              <td>{{index+1}}</td>
+              <td>{{getListarCliente[index].cedula}}</td>
+              <td>{{getListarCliente[index].nombreCliente}}</td>
+              <td>{{getListarCliente[index].apellidoCliente}}</td>
+              <td>{{getListarCliente[index].estadoCliente}}</td>
+              <td class="btn-accion">
+                <button (click)="HistorialCliente(getListarCliente[index].idCliente,index)" class="text-danger fw-bold"
+                  [attr.data-toggle]="'modal'" [attr.data-target]="'#ModalUsuario'+index" matTooltipPosition="right"
+                  matTooltip="Visualizar Factura"><i class="fa-solid fa-scroll"></i></button>
+                <span>&nbsp;</span>
+                <button class="text-success fw-bold" matTooltipPosition="above" matTooltip="Enviar Factura"><i
+                    class="fa-brands fa-whatsapp"></i></button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+      <div class="card" style="position: relative;left: 380px;top: 240px;width: 700px;">
+        <h5 class="card-header"><b>Tipos de pagos</b></h5>
+        <div class="card-body">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ng-container *ngFor="let item of getListarCliente;index as index">
+
+  <div class="modal fade" id="ModalUsuario{{index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">
+            Cliente: <strong>{{getListarCliente[index].nombreCliente+"
+              "+getListarCliente[index].apellidoCliente}}</strong>
+          </h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fecha_Facturacion</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody style="text-align: center;">
+              <tr *ngFor="let iterador of getFilterFactura;index as index">
+                <td>{{index+1}}</td>
+                <td>{{getFilterFactura[index].fechaFactura}}</td>
+                <td>
+                  <button class="btn btn-danger"
+                    (click)="imprimirPdf(getFilterFactura[index].idCliente,getFilterFactura[index].idFactura)">Descargar
+                    PDF.</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar Historial</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

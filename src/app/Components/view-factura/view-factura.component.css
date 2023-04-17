@@ -1,0 +1,43 @@
+/* table {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+} */
+
+#Io-Search {
+  width: 300px;
+  position: absolute;
+  left: -20%;
+  margin-top: 20px;
+}
+
+.row input {
+  width: 800px;
+  position: relative;
+  top: 34px;
+}
+
+.row button {
+  position: relative;
+  left: 820px;
+}
+
+.table thead tr th {
+  text-align: center;
+}
+
+.btn-accion button {
+  outline: none;
+  background: none;
+  border: none;
+  font-size: 20px;
+  text-align: center;
+}
+
+input[type='search'] {
+  position: relative;
+  left: -20px;
+}
+
+table.table-hover tbody tr:hover {
+  background: black;
+  color: #fff;
+}

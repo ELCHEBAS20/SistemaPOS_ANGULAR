@@ -1,0 +1,12 @@
+#logo_dash {
+  font-size: 50px;
+  position: relative;
+  left: 75px;
+  color: red;
+}
+
+._home_ {
+  position: absolute;
+  left: 91%;
+  top: 10%;
+}

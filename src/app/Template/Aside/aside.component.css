@@ -1,0 +1,22 @@
+aside {
+  background: #1b1b38;
+}
+
+.nav-item a:hover {
+  background: #CE8BFF;
+  color: #020202 !important;
+  font-weight: bold !important;
+}
+
+nav>i {
+  color: #323259 !important;
+}
+
+.info a:hover {
+  background: transparent;
+  color: transparent !important;
+}
+
+.idLogo {
+  color: #ffff;
+}

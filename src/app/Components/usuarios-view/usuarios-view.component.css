@@ -1,0 +1,59 @@
+:root {
+  --txt_center: center;
+  --txt_No_focus: none;
+}
+
+
+.custom-control-input:checked~.custom-control-label::before {
+  background-color: red !important;
+  filter: blur(0) !important;
+  border: none;
+}
+
+thead {
+  text-align: var(--txt_center);
+}
+
+tbody {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  text-align: var(--txt_center);
+}
+
+
+.bx-active {
+  width: 20px;
+  height: 20px;
+  text-align: var(--txt_center);
+  border-radius: 10px;
+}
+
+#rstActive {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: 47px;
+  top: 3px;
+  border-radius: 100%;
+}
+
+.btn_modificar {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.txt_pswd_input {
+  -webkit-filter: blur(4px);
+}
+
+.txt_pswd_input:focus {
+  -webkit-filter: var(--txt_No_focus);
+}
+
+#txt_pswd_regi {
+  -webkit-filter: blur(2px);
+}
+
+#txt_pswd_regi:focus {
+  -webkit-filter: var(--txt_No_focus);
+}

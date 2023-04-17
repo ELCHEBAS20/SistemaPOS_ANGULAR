@@ -1,0 +1,377 @@
+<app-header></app-header>
+<app-aside></app-aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="background: #fff !important;">
+  <!-- Default switch -->
+
+  <div class="d-flex flex-row">
+    <div class="bx-flex mx-5" style="position: relative;top:40px;">
+      <div id="accordion">
+        <div class="card col-md-12">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                <strong><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Empleado</strong>
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <small [style]="{'display': VisibleMsg ? 'block' : 'none'}"><i
+                  class="fa-solid fa-check text-success"></i>&nbsp;<strong>Actualizado el empleado con
+                  exito.</strong></small>
+              <div class="d-flex flex-row justify-content-end" style="position: relative;top: -20px;">
+                <div class="bg-success" id="rstActive"></div>
+                <div class="mx-5 "><strong>Activado</strong>
+                </div>
+                <div class="bg-danger" id="rstActive"></div>
+                <div class="mx-5"><strong>No Activado</strong></div>
+              </div>
+
+
+              <table class="table" style="width: 1120px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">NombreUsuario</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let item of datafinal;index as index">
+                    <td>{{index+1}}</td>
+                    <td *ngIf="datafinal[index].estadoCajero=='1';else loggedOut">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input"
+                          id="customSwitch{{datafinal[index].idCajero}}"
+                          (click)="function_Update_Switch(datafinal[index].idCajero,$event)">
+                        <label class="custom-control-label" for="customSwitch{{datafinal[index].idCajero}}"></label>
+                      </div>
+                    </td>
+                    <ng-template #loggedOut>
+                      <td>
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input"
+                            id="customSwitch{{datafinal[index].idCajero}}"
+                            (click)="function_Update_Switch(datafinal[index].idCajero,$event)" disabled checked>
+                          <label class="custom-control-label" for="customSwitch{{datafinal[index].idCajero}}"></label>
+                        </div>
+                      </td>
+                    </ng-template>
+                    <td>{{datafinal[index].nombreCajero}}</td>
+                    <td>{{datafinal[index].usuarioCajero}}</td>
+                    <td>{{datafinal[index].generoCajero}}</td>
+                    <td>
+                      <button class="btn-sm btn_modificar" [attr.data-toggle]="'modal'"
+                        [attr.data-target]="'#exampleModal'+index" id="btn_modificar{{index}}"><i
+                          style="font-size: 20px;" data-toggle="tooltip" data-placement="top" title="Modificar"
+                          class="fa-solid fa-pen text-primary"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+        <div class="card col-md-12">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="false" aria-controls="collapseTwo">
+                <strong><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Empleado Activos</strong>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+
+
+              <div class="d-flex flex-row justify-content-end" style="position: relative;top: -20px;">
+                <div class="bg-success" id="rstActive"></div>
+                <div class="mx-5 "><strong>Activado</strong>
+                </div>
+                <div class="bg-danger" id="rstActive"></div>
+                <div class="mx-5"><strong>No Activado</strong></div>
+              </div>
+
+              <div style="width: 1120px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;"
+                [ngStyle]="{'display': (disabled_table) ? 'none' : 'block' }">
+                <p align="center"><strong>¡En Estos Momentos No Se Encuentra Ningun Activo En El Sistema!</strong></p>
+              </div>
+
+              <table class="table" id="table_data"
+                [ngStyle]="{'display': (disabled_table) ? 'width:1120;text-align:center;box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px' : '' }"
+                style="width: 1120px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Perfil</th>
+                    <th scope="col">NombreUsuario</th>
+                    <th scope="col">Ocupacion</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of datafinal;index as index;">
+                    <ng-container *ngIf="datafinal[index].estadoCajero!='0'">
+                      <td *ngIf="datafinal[index].generoCajero!='F';else ImgWoman">
+                        <div class="image">
+                          <img src="../../assets/dist/img/ImgMan.jpg" width="30" class="img-circle elevation-2"
+                            alt="User Image">
+                        </div>
+                      </td>
+                      <ng-template #ImgWoman>
+                        <td>
+                          <div class="image">
+                            <img src="../../assets/dist/img/ImgWoman.jpg" width="30" class="img-circle elevation-2"
+                              alt="User Image">
+                          </div>
+                        </td>
+                      </ng-template>
+                      <td>{{datafinal[index].usuarioCajero}}</td>
+                      <td>Cajero</td>
+                      <td>
+                        <div class="bx-active bg-success"></div>
+                      </td>
+                    </ng-container>
+
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card col-md-12">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-danger collapsed" data-toggle="collapse" data-target="#collapseThree"
+                aria-expanded="false" aria-controls="collapseThree">
+                <strong><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Empleado NO activos</strong>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <div class="d-flex flex-row justify-content-end" style="position: relative;top: -20px;">
+                <div class="bg-success" id="rstActive"></div>
+                <div class="mx-5 "><strong>Activado</strong>
+                </div>
+                <div class="bg-danger" id="rstActive"></div>
+                <div class="mx-5"><strong>No Activado</strong></div>
+              </div>
+
+              <div style="width: 1120px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;"
+                [ngStyle]="{'display': (disabled_table_NO) ? 'none' : 'block' }">
+                <p align="center"><strong>¡En Estos Momentos No Se Encuentra Ningun Desactivado En El Sistema!</strong>
+                </p>
+              </div>
+
+              <table class="table" id="table_data_NO"
+                [ngStyle]="{'display': (disabled_table_NO) ? 'width:1120;text-align:center;box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px' : '' }"
+                style="width: 1120px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Perfil</th>
+                    <th scope="col">NombreUsuario</th>
+                    <th scope="col">Ocupacion</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of datafinal;index as index;">
+                    <ng-container *ngIf="datafinal[index].estadoCajero!='1'">
+                      <td *ngIf="datafinal[index].generoCajero!='F';else ImgWoman">
+                        <div class="image">
+                          <img src="../../assets/dist/img/ImgMan.jpg" width="30" class="img-circle elevation-2"
+                            alt="User Image">
+                        </div>
+                      </td>
+                      <ng-template #ImgWoman>
+                        <td>
+                          <div class="image">
+                            <img src="../../assets/dist/img/ImgWoman.jpg" width="30" class="img-circle elevation-2"
+                              alt="User Image">
+                          </div>
+                        </td>
+                      </ng-template>
+                      <td>{{datafinal[index].usuarioCajero}}</td>
+                      <td>Cajero</td>
+                      <td>
+                        <div class="bx-active bg-danger"></div>
+                      </td>
+                    </ng-container>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card col-md-8">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-warning collapsed" data-toggle="collapse" data-target="#collapsefour"
+                aria-expanded="false" aria-controls="collapseThree">
+                <strong><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Agregar Empleado</strong>
+              </button>
+            </h5>
+          </div>
+          <div id="collapsefour" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <form style="width: 1120px;" [formGroup]="UserForm"
+                (ngSubmit)="function_InsertarCajeros(UserForm.value,EstadoValue,CargoValue)">
+                <div class="row my-3">
+
+                  <div class="col-md-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="typeText"><small class="text-danger">*</small>Nombre: </label>
+                      <input type="text" id="typeText" class="form-control" formControlName="Nombre" />
+                      <small id="txt_error0" style="display: none;" class="form-text text-danger">El nombre es un campo
+                        requerido.</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="typeText">Apellido: </label>
+                      <input type="text" id="typeText" class="form-control" formControlName="Apellido" />
+                      <small id="txt_error1" style="display: none;" class="form-text text-danger">El Apellido es un
+                        campo requerido.</small>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row my-3">
+                  <div class="col-md-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="typeEmail">Cargo: </label>
+                      <input type="text" value="Cajero" readonly class=" form-control" #CargoValue />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="typePhone"><small class="text-danger">*</small>Usuario: </label>
+                      <input type="text" id="typePhone" class="form-control" formControlName="Usuario" />
+                      <small id="txt_error2" style="display: none;" class="form-text text-danger">El Usuario es un campo
+                        requerido.</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="col-md-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="typeEmail"><small class="text-danger">*</small>Contraseña: </label>
+                      <input type="text" maxlength="8" min="8" id="txt_pswd_regi" class="form-control"
+                        formControlName="Contraseña" />
+                      <small id="txt_error3" style="display: none;" class="form-text text-danger">La Contraseña es un
+                        campo requerido.</small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="typePhone"><small class="text-danger">*</small>Genero: </label>
+                      <input type="text" id="typePhone" class="form-control" formControlName="Genero" />
+                      <small id="txt_error4" style="display: none;" class="form-text text-danger">El Genero es un campo
+                        requerido.</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="col-md-4">
+                    <div class="form-outline">
+                      <label class="form-label" for="typeEmail"><small class="text-danger">*</small>Estado: </label>
+                      <input type="text" id="typeEmail" value="1" class="form-control" #EstadoValue readonly />
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center" style="position: relative;left: -180px;">
+                  <button class="btn btn-primary w-50">Registrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let item of datafinal;index as index">
+  <div class="modal fade" id="exampleModal{{index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><strong>Información Empleado</strong></h5>
+          <button type="button" id="close_modal{{index}}" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="txt_error{{index}}" style="color: red; text-align: center;"></div>
+          <form id="form_group" #formTemplate="ngForm" (ngSubmit)="function_UpdateEmpleadoTotal(index,formTemplate)">
+            <div class="form-group">
+              <label style="display: none;" for="exampleInputEmail1">idEmpleado </label>
+              <input type="hidden" class="form-control " name="txt_id" aria-describedby="emailHelp"
+                placeholder="Enter Nombre" ngModel="{{datafinal[index].idCajero}}">
+              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nombre Emplead@: </label>
+              <input type="text" ngModel="{{datafinal[index].nombreCajero}}" class="form-control"
+                aria-describedby="emailHelp" name="txt_nombre" placeholder="Enter Nombre">
+              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Apellido Emplead@: </label>
+              <input type="text" name="txt_apellido" class="form-control" ngModel="{{datafinal[index].apellidoCajero}}"
+                aria-describedby="emailHelp" placeholder="Enter Apellido">
+            </div>
+
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Usuari@ Emplead@: </label>
+              <input type="text" name="txt_user" class="form-control" ngModel="{{datafinal[index].usuarioCajero}}"
+                aria-describedby="emailHelp" placeholder="Enter Usuario">
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Contraseña: </label>
+              <input type="email" name="txt_pswd" ngModel="{{datafinal[index].pswdCajero}}"
+                class="form-control txt_pswd_input" aria-describedby="emailHelp" placeholder="Enter Contraseña">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Genero: </label>
+              <input type="email" name="txt_genero" class="form-control" ngModel="{{datafinal[index].generoCajero}}"
+                aria-describedby="emailHelp" placeholder="Enter Genero">
+
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Estado: </label>
+              <input type="email" name="txt_status" class="form-control" ngModel="{{datafinal[index].estadoCajero}}"
+                maxlength="1" minlength="1" onkeypress="if(event.keyCode<48 || event.keyCode>49){return false;}"
+                id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Estado">
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-primary btn-lg btn-block btn-sm">Actualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

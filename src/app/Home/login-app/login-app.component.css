@@ -1,0 +1,75 @@
+.bx-form {
+  width: 800px;
+  height: 500px;
+  background: #fff;
+  position: absolute;
+  top: 20%;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+#imgBox {
+  width: 380px;
+  height: 497px;
+  background: none;
+  position: relative;
+  left: -12px;
+}
+
+#childrenForm {
+  width: 300px;
+  height: 450px;
+  background: transparent;
+  position: absolute;
+  top: 4%;
+  left: 60%;
+}
+
+.form-main {
+  position: relative;
+  top: 30px;
+}
+
+.form-group>a {
+  position: absolute;
+  margin-top: 13%;
+  margin-left: 64%;
+  z-index: 100;
+}
+
+#rdb_contains {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.bx_contain {
+  margin-left: 3rem;
+  position: relative;
+  left: -30px;
+}
+
+.text {
+  display: inline-block;
+  position: relative;
+  left: 25px;
+}
+
+h1 {
+  overflow: hidden;
+  border-right: .15em solid black;
+  white-space: nowrap;
+  animation: typing 2s infinite alternate steps(28);
+  text-align: center;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 105%;
+  }
+}
