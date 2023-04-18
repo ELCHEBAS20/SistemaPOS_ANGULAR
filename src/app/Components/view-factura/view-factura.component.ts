@@ -18,6 +18,9 @@ export class ViewFacturaComponent implements OnInit {
   public getListarFactura: any = [];
   public getFilterFactura: any = [];
   public getColumns: any = [];
+  public setIcons: string[] = ['money-bill', 'credit-card', 'credit-card', 'money-bill'];
+  public setTipoPago: any = [];
+  public dateToday = new Date().toLocaleString();
 
   constructor(public appConsumo: AppConsumo, public render: Renderer2) { }
 
@@ -25,10 +28,13 @@ export class ViewFacturaComponent implements OnInit {
 
     this.function_SetFactura();
     this.function_SetClientes();
+    this.setTipoPagos();
 
     setTimeout(() => {
       this.OptionDatatable();
     }, 400)
+
+
 
   }
 
@@ -235,4 +241,10 @@ export class ViewFacturaComponent implements OnInit {
     return this.getFilterFactura = RstFilter;
   }
 
+  public setTipoPagos() {
+    this.appConsumo.function_GET_LISTAR('TipoPago').subscribe((resp: any) => {
+      this.setTipoPago = resp;
+      console.log(this.setTipoPago);
+    })
+  }
 }

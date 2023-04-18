@@ -41,3 +41,78 @@ table.table-hover tbody tr:hover {
   background: black;
   color: #fff;
 }
+
+.bx_grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+}
+
+.bx_grid_class {
+  background: red;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  font-size: 100px;
+}
+
+
+.bx_grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  grid-column-gap: 50px;
+}
+
+.bx_grid_class {
+  width: 200px;
+  height: 200px;
+  background: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-top: 12px;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  transition: 0.5s all ease-in;
+}
+
+.bx_grid_class span {
+  font-size: 16px;
+  position: relative;
+  top: -15px;
+}
+
+.bx_grid_class:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.bx_grid_class i {
+  padding-top: -120px;
+}
+
+.bxbodyclass {
+  position: relative;
+  top: -20px;
+}
+
+.bx_class {
+  position: relative;
+  top: -38px;
+}
+
+.body_card_bx {
+  position: absolute;
+  top: 30px;
+}
+
+.txtBx {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  grid-column-gap: 10px;
+}
+
+.bx_accion_input label {
+  position: relative;
+  left: 15px;
+}

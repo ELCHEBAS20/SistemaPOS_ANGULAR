@@ -2,8 +2,19 @@
 <app-aside></app-aside>
 
 <div class="content-wrapper" style="background: #fff !important;">
+  <div class="bx_grid">
+    <div class="bx_grid_class" data-toggle="modal" data-target="#MediosPago">
+      <i class="fa-solid fa-money-bill"></i>
+      <span>Medios de pago</span>
+    </div>
+    <div class="bx_grid_class" data-toggle="modal" data-target="#CrearFactura">
+      <i class="fa-solid fa-plus"></i>
+      <span>Crear factura</span>
+    </div>
+  </div>
 
-  <!-- <div class="card-body">
+
+  <div class="card-body">
     <table id="user-table" style="width: 1200px;" class="table table-hover table-striped">
       <thead class="thead-dark">
         <tr>
@@ -34,76 +45,9 @@
       </tbody>
 
     </table>
-  </div> -->
-
-  <div class="nav flex-column nav-pills w-25" style="position: relative;top: 200px;left: 10px;text-align: center;"
-    id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-      aria-controls="v-pills-home" aria-selected="true"><i class="fa-solid fa-plus"></i>&nbsp; Creacion de Factura</a>
-    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-      aria-controls="v-pills-messages" aria-selected="false"><i class="fa-brands fa-paypal"></i>&nbsp; Servicio de
-      pago</a>
-    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-      aria-controls="v-pills-profile" aria-selected="false"><i class="fa-solid fa-check"></i>&nbsp; Facturas
-      Realizadas</a>
-  </div>
-  <div class="tab-content" style="position: absolute;left: 22%;top: -20px;" id="v-pills-tabContent">
-    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-
-
-      <div class="card" style="position: relative;left: 380px;top: 240px;width: 700px;">
-        <h5 class="card-header"><b>Creacion de factura</b></h5>
-        <div class="card-body">
-
-        </div>
-      </div>
-
-    </div>
-    <div class="tab-pane fade w-50" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-      <div class="card-body">
-        <table id="user-table" style="width: 800px;" class="table table-hover table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Cedula</th>
-              <th scope="col">NombreCliente</th>
-              <th scope="col">ApellidoCliente</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody style="text-align: center;">
-            <tr *ngFor="let item of getListarCliente;index as index">
-              <td>{{index+1}}</td>
-              <td>{{getListarCliente[index].cedula}}</td>
-              <td>{{getListarCliente[index].nombreCliente}}</td>
-              <td>{{getListarCliente[index].apellidoCliente}}</td>
-              <td>{{getListarCliente[index].estadoCliente}}</td>
-              <td class="btn-accion">
-                <button (click)="HistorialCliente(getListarCliente[index].idCliente,index)" class="text-danger fw-bold"
-                  [attr.data-toggle]="'modal'" [attr.data-target]="'#ModalUsuario'+index" matTooltipPosition="right"
-                  matTooltip="Visualizar Factura"><i class="fa-solid fa-scroll"></i></button>
-                <span>&nbsp;</span>
-                <button class="text-success fw-bold" matTooltipPosition="above" matTooltip="Enviar Factura"><i
-                    class="fa-brands fa-whatsapp"></i></button>
-              </td>
-            </tr>
-          </tbody>
-
-        </table>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-      <div class="card" style="position: relative;left: 380px;top: 240px;width: 700px;">
-        <h5 class="card-header"><b>Tipos de pagos</b></h5>
-        <div class="card-body">
-
-        </div>
-      </div>
-
-    </div>
   </div>
 </div>
+
 
 <ng-container *ngFor="let item of getListarCliente;index as index">
 
@@ -150,3 +94,105 @@
   </div>
 
 </ng-container>
+
+<!-- Modal para medios de pago -->
+
+<div class="modal fade" id="MediosPago" tabindex="-1" role="dialog" aria-labelledby="MediosPago" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel" align="center">
+          <strong>Medios de pago</strong>
+        </h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="bx_grid">
+
+          <div *ngFor="let item of setTipoPago;index as index">
+            <div class="bx_grid_class">
+              <div class="bx_class">
+                <h4><b>{{setTipoPago[index].metodoPago}}</b></h4>
+                <div class="body_card_bx">
+                  <div *ngIf="index>=2 && index<=3;else templateName">
+                    <i class="fa-solid fa-credit-card"></i>
+                  </div>
+                  <ng-template #templateName>
+                    <i class="fa-solid fa-money-bill"></i>
+                  </ng-template>
+                  <input type="radio" name="data_final" value="{{setTipoPago[index].idPago}}"
+                    style="height:35px; width:35px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary w-100">Modificar </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cierre de medios de pago -->
+
+
+<!-- Modal para crear factura -->
+
+<div class="modal fade" id="CrearFactura" tabindex="-1" role="dialog" aria-labelledby="CrearFactura" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><strong>Crear Factura Electronica</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="txtBx">
+          <div class="bx_accion_input">
+            <label>Fecha Factura</label>
+            <input type="text" class="form-control" value="{{dateToday}}">
+          </div>
+          <div class="bx_accion_input">
+            <label>Cedula del usuario</label>
+            <input type="text" id="txt_0" class="form-control" value="">
+          </div>
+          <div class="bx_accion_input">
+            <label>Nombre Cliente: </label>
+            <input type="text" id="txt_1" class="form-control" readonly value="">
+          </div>
+          <div class="bx_accion_input">
+            <label>Correo Cliente: </label>
+            <input type="text" id="txt_2" class="form-control" readonly value="">
+          </div>
+
+          <div class="bx_accion_input">
+            <label>Direccion Cliente: </label>
+            <input type="text" id="txt_3" class="form-control" readonly value="">
+          </div>
+          <div class="bx_accion_input">
+
+            <label>Telefono Cliente: </label>
+            <input type="text" id="txt_4" class="form-control" readonly value="+57">
+          </div>
+          <div class="bx_accion_input">
+            <label>Total a pagar</label>
+            <input type="text" class="form-control" value="">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary w-100">Crear Factura</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cierre de crear factura -->
