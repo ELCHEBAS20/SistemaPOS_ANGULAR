@@ -116,3 +116,35 @@ table.table-hover tbody tr:hover {
   position: relative;
   left: 15px;
 }
+
+#bxProductos {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  grid-column-gap: 20px;
+}
+
+.children-productos {
+  width: 170px;
+  height: 45px;
+  margin-top: 5px;
+  text-align: center;
+  padding: 12px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  animation: myAnim 1s ease 0s 1 normal none;
+}
+
+.txtTitle {
+  position: relative;
+  left: 20px;
+}
+
+@keyframes myAnim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

@@ -24,6 +24,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 import { DataTablesModule } from 'angular-datatables';
 import { PreguntaFrecuentesComponent } from './Components/pregunta-frecuentes/pregunta-frecuentes.component';
+import { MatSelectModule } from '@angular/material/select';
+import { AppConsumo } from "../app/Config/Services/Consumo.component";
 
 
 
@@ -62,9 +64,10 @@ import { PreguntaFrecuentesComponent } from './Components/pregunta-frecuentes/pr
     MatIconModule,
     NgChartsModule,
     MatTooltipModule,
-    DataTablesModule
+    DataTablesModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [AppConsumo],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

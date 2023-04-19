@@ -1,7 +1,8 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AppConsumo } from '../../Config/Services/Consumo.component';
 import pdfMake from 'pdfmake/build/pdfMake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { FormControl, FormGroup } from '@angular/forms';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -18,9 +19,17 @@ export class ViewFacturaComponent implements OnInit {
   public getListarFactura: any = [];
   public getFilterFactura: any = [];
   public getColumns: any = [];
-  public setIcons: string[] = ['money-bill', 'credit-card', 'credit-card', 'money-bill'];
   public setTipoPago: any = [];
   public dateToday = new Date().toLocaleString();
+
+  @ViewChild('cmbProductos') cmbxProducto: ElementRef;
+
+  public formFactura = new FormGroup({
+    nombreCliente: new FormControl(''),
+    correoCliente: new FormControl(''),
+    DireccionCliente: new FormControl(''),
+    telefonoCliente: new FormControl('')
+  });
 
   constructor(public appConsumo: AppConsumo, public render: Renderer2) { }
 
@@ -29,13 +38,11 @@ export class ViewFacturaComponent implements OnInit {
     this.function_SetFactura();
     this.function_SetClientes();
     this.setTipoPagos();
+    this.getProductos();
 
     setTimeout(() => {
       this.OptionDatatable();
     }, 400)
-
-
-
   }
 
   public OptionDatatable() {
@@ -64,8 +71,7 @@ export class ViewFacturaComponent implements OnInit {
 
   public function_GetCliente(data: any) {
     this.getListarCliente = data;
-    this.getColumns = Object.keys(this.getListarCliente.at(0));
-    console.log(this.getColumns);
+    console.log(this.getListarCliente)
   }
 
   public async imprimirPdf(objData: string, idFactura: number) {
@@ -245,6 +251,38 @@ export class ViewFacturaComponent implements OnInit {
     this.appConsumo.function_GET_LISTAR('TipoPago').subscribe((resp: any) => {
       this.setTipoPago = resp;
       console.log(this.setTipoPago);
+    })
+  }
+
+  public addFactura(data: string) {
+    if (data.length == 8 || data.length == 10) {
+      var RstFactura = this.getListarCliente.filter((item: { cedula: string }) => item.cedula == data);
+      ;
+      this.formFactura = new FormGroup({
+        nombreCliente: new FormControl(RstFactura[0].nombreCliente),
+        correoCliente: new FormControl(RstFactura[0].correo),
+        DireccionCliente: new FormControl(RstFactura[0].dire),
+        telefonoCliente: new FormControl(RstFactura[0].telefono)
+      });
+
+    } else {
+      this.formFactura.reset();
+    }
+
+    console.log(this.formFactura.value);
+
+
+  }
+
+  public getProductos() {
+
+    let cmbMain = document.getElementById('cmbMain') as HTMLElement;
+    let countCmb = 1;
+
+    this.appConsumo.function_GET_LISTAR('Productos').subscribe((resp: any) => {
+      for (let index in resp) {
+        cmbMain.innerHTML += `<option value="${resp[index].codigoBarras}" >${countCmb++}.${resp[index].nombreProducto}</option>`;
+      }
     })
   }
 }
